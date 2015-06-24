@@ -2,18 +2,49 @@ extends layout
 
 block content
   if currentUser
-    p Hello #{currentUser}!
-    p You have visited this page #{visits} times.
-    form(action="/logout" method="post")
-      input(type="submit" value="Logout")
+    if backgroundColor
+      div(style="background-color: #{backgroundColor}")
+        p Hello #{currentUser}!
+        p You have visited this page #{visits} times.
+        form(action="/color" method="post")
+          label(for="color") Select a background color:
+          p
+          select(id="color" name="color")
+            option(selected disabled) Choose one...
+            option Red 
+            option Purple
+            option Blue
+          input(type="submit" value="Change")
+        p
+        
+        form(action="/logout" method="post")
+          input(type="submit" value="Logout")
+    else
+      div
+        p Hello #{currentUser}!
+        p You have visited this page #{visits} times.
+        form(action="/color" method="post")
+          label(for="color") Select a background color:
+          p
+          select(id="color" name="color")
+            option(selected disabled) Choose one...
+            option Red 
+            option Purple
+            option Blue
+          input(type="submit" value="Change")
+        p
+        
+        form(action="/logout" method="post")
+          input(type="submit" value="Logout")
   else
-    h2 #{title}
-    form(action="/fake-login" method="post")
-      label(for="user_name") What is your username?
-      p
-      input(type="text" id="user_name" name="user_name")
-      p
-      input(type="submit" value="Login")
+    div
+      h2 #{title}
+      form(action="/fake-login" method="post")
+        label(for="user_name") What is your username?
+        p
+        input(type="text" id="user_name" name="user_name")
+        p
+        input(type="submit" value="Login")
   
   
   
