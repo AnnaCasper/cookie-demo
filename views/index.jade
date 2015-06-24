@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  if currentUser
+    p Hello #{currentUser}!
+    p You have visited this page #{visits} times.
+    form(action="/logout" method="post")
+      input(type="submit" value="Logout")
+  else
+    h2 #{title}
+    form(action="/fake-login" method="post")
+      label(for="user_name") What is your username?
+      p
+      input(type="text" id="user_name" name="user_name")
+      p
+      input(type="submit" value="Login")
+  
+  
+  
