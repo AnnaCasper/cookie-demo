@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
+console.log(process.env.MONGO_URI);
+var db = require('monk')(process.env.MONGO_URI);
 
-var db = require('monk')('process.env.MONGO_URI');
 var cookieCollection = db.get('cookies');
 
 var bcrypt = require('bcryptjs');
@@ -27,8 +28,10 @@ router.get('/', function(req, res, next) {
 router.post('/signup', function(req, res, next){
   res.cookie('currentUser', req.body.user_name);
   var hash = bcrypt.hashSync(req.body.password, 8);
-  cookieCollection.insert({ username: req.body.user_name, password: hash});
-  res.redirect('/');
+  cookieCollection.insert({ username: req.body.user_name, password: hash}, function (err, record) {
+    console.log(err, record);
+    res.redirect('/');
+  });
 });
 
 router.post('/login', function(req, res, next){
