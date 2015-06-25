@@ -36,15 +36,105 @@ block content
         
         form(action="/logout" method="post")
           input(type="submit" value="Logout")
-  else
+          
+  else if currentLoginUser
+    if backgroundColor
+      div(style="background-color: #{backgroundColor}")
+        h2 YAY!!
+        p Hello #{currentUser}!
+        p You have visited this page #{visits} times.
+        form(action="/color" method="post")
+          label(for="color") Select a background color:
+          p
+          select(id="color" name="color")
+            option(selected disabled) Choose one...
+            option Red 
+            option Purple
+            option Blue
+          input(type="submit" value="Change")
+        p
+        
+        form(action="/logout" method="post")
+          input(type="submit" value="Logout")
+    else
+      div
+        h2 YAY!!
+        p Hello #{currentUser}!
+        p You have visited this page #{visits} times.
+        form(action="/color" method="post")
+          label(for="color") Select a background color:
+          p
+          select(id="color" name="color")
+            option(selected disabled) Choose one...
+            option Red 
+            option Purple
+            option Blue
+          input(type="submit" value="Change")
+        p
+        
+        form(action="/logout" method="post")
+          input(type="submit" value="Logout")
+  else if error  
     div
       h2 #{title}
-      form(action="/fake-login" method="post")
-        label(for="user_name") What is your username?
+      h1 Sign Up
+      form(action="/signup" method="post")
+        label(for="user_name") Username:
         p
         input(type="text" id="user_name" name="user_name")
         p
-        input(type="submit" value="Login")
-  
+        label(for="password") Password:
+        p
+        input(type="password" id="password" name="password")
+        p
+        label(for="confirmation") Confirm Password:
+        p
+        input(type="password" id="confirmation" name="confirmation")
+        p
+        input(type="submit" value="Sign Up")
+        
+      h1 Log In
+      p(style="color: red") #{error}
+      form(action="/login" method="post")
+        label(for="login_user_name") Username:
+        p
+        input(type="text" id="login_user_name" name="login_user_name")
+        p
+        label(for="login_password") Password:
+        p
+        input(type="password" id="login_password" name="login_password")
+        p
+        input(type="submit" value="Log In")
+  else
+    div
+      h2 #{title}
+      h1 Sign Up
+      form(action="/signup" method="post")
+        label(for="user_name") Username:
+        p
+        input(type="text" id="user_name" name="user_name")
+        p
+        label(for="password") Password:
+        p
+        input(type="password" id="password" name="password")
+        p
+        label(for="confirmation") Confirm Password:
+        p
+        input(type="password" id="confirmation" name="confirmation")
+        p
+        input(type="submit" value="Sign Up")
+        
+      h1 Log In
+      form(action="/login" method="post")
+        label(for="login_user_name") Username:
+        p
+        input(type="text" id="login_user_name" name="login_user_name")
+        p
+        label(for="login_password") Password:
+        p
+        input(type="password" id="login_password" name="login_password")
+        p
+        input(type="submit" value="Log In")
+        
   
   
